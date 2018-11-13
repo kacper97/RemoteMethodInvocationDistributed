@@ -74,6 +74,4 @@ public class RMIServer extends UnicastRemoteObject
 			e.printStackTrace();
 		}
 }
-
-
 }
