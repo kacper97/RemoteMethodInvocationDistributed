@@ -167,6 +167,7 @@ public RMIClient(){
     		System.out.println("You pressed One");
     		view.setText("1");
     			x = 1;
+    			y = 1;
 		}
 	});
 	
@@ -175,6 +176,7 @@ public RMIClient(){
     		System.out.println("You pressed Two");
     		view.setText("2");
     			x = 2;
+    			y = 2;
 		}
 	});
 	
@@ -183,6 +185,7 @@ public RMIClient(){
     		System.out.println("You pressed Three");
     		view.setText("3");
     			x = 3;
+    			y = 3; 
 		}
 	});
 	
@@ -191,6 +194,7 @@ public RMIClient(){
     		System.out.println("You pressed Four");
     		view.setText("4");
     			x = 4;
+    			y = 4;
 		}
 	});
 	
@@ -199,6 +203,7 @@ public RMIClient(){
     		System.out.println("You pressed Five");
     		view.setText("5");
     			x = 5;
+    			y = 5; 
 		}
 	});
 	
@@ -207,6 +212,7 @@ public RMIClient(){
     		System.out.println("You pressed Six");
     		view.setText("6");
     			x = 6;
+    			y = 6; 
 		}
 	});
 	
@@ -215,6 +221,7 @@ public RMIClient(){
     		System.out.println("You pressed Seven");
     		view.setText("7");
     			x = 7;
+    			y = 7; 
 		}
 	});
 	
@@ -223,6 +230,7 @@ public RMIClient(){
     		System.out.println("You pressed Eight");
     		view.setText("8");
     			x = 8;
+    			y = 8; 
 		}
 	});
 	
@@ -231,6 +239,7 @@ public RMIClient(){
     		System.out.println("You pressed Nine");
     		view.setText("9");
     			x = 9;
+    			y = 9; 
 		}
 	});
 	
@@ -239,54 +248,75 @@ public RMIClient(){
     		System.out.println("You pressed Zero");
     		view.setText("0");
     			x = 0;
+    			y = 0;
+		}
+	});
+	
+	
+	buttonMult.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+    		System.out.println("You pressed Multiply");
+    		view.setText(x+"*");
+		}
+	});
+	
+	buttonDiv.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+    		System.out.println("You pressed Div");
+    		view.setText(x+"/");
+		}
+	});
+	
+	buttonAdd.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+    		System.out.println("You pressed Add");
+    		view.setText(x+"+");
+		}
+	});
+	
+	buttonSub.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+    		System.out.println("You pressed Subtrack");
+    		view.setText(x+"-");
+		}
+	});
+	
+	btnSubmit.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+    		System.out.println("You pressed Submit");
+    		
+    		try {
+    			obj = (RMI)Naming.lookup("//"
+    					+ "localhost"
+    					+ "/HelloWorld");
+    			message = obj.helloWorld();
+    			
+    			int sum = obj.addNums(x,y);
+    			System.out.println(sum);
+    			
+    		
+    			int mult = obj.multiplyNums(x,y);
+    			System.out.println(mult);
+
+    		     
+    			int div = obj.divideNums(x, y);
+    			System.out.println(div);
+    			
+    			
+    			int sub = obj.subNums(x,y);
+    			System.out.println(sub);
+    		}
+    		catch (Exception ex) {
+    			System.out.println("HelloWorldClient exception: "
+    					+ ex.getMessage());
+    			ex.printStackTrace();
+    		}
+    			
 		}
 	});
 }
 
 	public static void main(String args[]){	
 		 new RMIClient();
-	try {
-		obj = (RMI)Naming.lookup("//"
-				+ "localhost"
-				+ "/HelloWorld");
-		message = obj.helloWorld();
-		
-		System.out.println("Please enter two random numbers you want to add up");
-		Scanner sc = new Scanner(System.in);
-	     int x = sc.nextInt();
-	     int y = sc.nextInt();
-		
-		int sum = obj.addNums(x, y);
-		System.out.println("Message from the RMI-server was: \""
-				+ message + "\n");
-		System.out.println(sum);
-		
-		System.out.println("Please enter two random numbers you want to multiply up");
-	     int x1 = sc.nextInt();
-	     int y1 = sc.nextInt();
-		
-		int mult = obj.multiplyNums(x1, y1);
-		System.out.println(mult);
-		
-		System.out.println("Please enter two random numbers you want to divide up");
-	     int x2 = sc.nextInt();
-	     int y2 = sc.nextInt();
-	     
-		int div = obj.divideNums(x2, y2);
-		System.out.println(div);
-		
-		System.out.println("Please enter two random numbers you want to subtract");
-	     int x3 = sc.nextInt();
-	     int y3 = sc.nextInt();
-	     
-		
-		int sub = obj.subNums(x3,y3);
-		System.out.println(sub);
-	}
-	catch (Exception e) {
-		System.out.println("HelloWorldClient exception: "
-				+ e.getMessage());
-		e.printStackTrace();
-	}
 	}
 }
