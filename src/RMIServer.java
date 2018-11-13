@@ -28,26 +28,30 @@ public class RMIServer extends UnicastRemoteObject
 	
 	@Override
 	public int addNums(int x, int y) throws RemoteException {
+		System.out.println("Add Nums bound in registry");
 		int sum = x + y;
 		return sum;
 	}
 	
 	@Override
-	public int subNums(int num1, int num2) throws RemoteException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int subNums(int x, int y) throws RemoteException {
+		System.out.println("sub Nums bound in registry");
+		int sub = x - y;
+		return sub;
 	}
 
 	@Override
-	public int multiplyNums(int num1, int num2) throws RemoteException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int multiplyNums(int x, int y) throws RemoteException {
+		System.out.println("Mult Nums bound in registry");
+		int mult = x*y ;
+		return mult;
 	}
 
 	@Override
-	public int divideNums(int num1, int num2) throws RemoteException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int divideNums(int x, int y) throws RemoteException {
+		System.out.println("Div Nums bound in registry");
+		int div = x/y;
+		return div;
 	}
 
 	public static void main(String args[]) {
@@ -66,7 +70,6 @@ public class RMIServer extends UnicastRemoteObject
 		
 			//Naming.rebind("HelloWorld", obj);
 			System.out.println("HelloWorld bound in registry");
-			System.out.println("Add Nums bound in registry");
 
 		}
 		catch (Exception e) {
