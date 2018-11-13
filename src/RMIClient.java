@@ -17,8 +17,8 @@ Comment: The RMI client.
 public class RMIClient extends JFrame {
 
 static String message = "blank";
-static int x;
-static int y;
+int x;
+int y;
 public JFrame frame;
 private JTextField view = new JTextField();
 
@@ -29,10 +29,10 @@ private JTextField view = new JTextField();
 static RMI obj = null;
 
 
+
 public RMIClient(){
 	
     // Window
-	
 	frame = new JFrame();
 	frame.setTitle("CALC");
 	frame.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
@@ -44,7 +44,7 @@ public RMIClient(){
 	frame.setVisible(true);
 	
 	//Text field
-    JScrollPane scrollPane = new JScrollPane(view);
+    JScrollPane scrollPane = new JScrollPane();
     scrollPane.setBounds(0, 0, 282, 85);
     frame.getContentPane().add(scrollPane);
     
@@ -53,8 +53,9 @@ public RMIClient(){
     view.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
     scrollPane.setViewportView(view);
     view.setColumns(10);
+
     
-    //Buttons
+    //Buttons Set up
     
     JButton buttonDiv = new JButton("/");
     buttonDiv.setFont(new Font("Stencil", Font.PLAIN, 16));
@@ -160,6 +161,8 @@ public RMIClient(){
     btnSubmit.setBackground(Color.CYAN);
     btnSubmit.setBounds(0, 345, 282, 58);
     frame.getContentPane().add(btnSubmit);
+    
+    //Numeric buttons Action listener
 
     
 	buttonOne.addActionListener(new ActionListener() {
@@ -252,34 +255,7 @@ public RMIClient(){
 		}
 	});
 	
-	
-	buttonMult.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-    		System.out.println("You pressed Multiply");
-    		view.setText(x+"*");
-		}
-	});
-	
-	buttonDiv.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-    		System.out.println("You pressed Div");
-    		view.setText(x+"/");
-		}
-	});
-	
-	buttonAdd.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-    		System.out.println("You pressed Add");
-    		view.setText(x+"+");
-		}
-	});
-	
-	buttonSub.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-    		System.out.println("You pressed Subtrack");
-    		view.setText(x+"-");
-		}
-	});
+	//Submit action listener
 	
 	btnSubmit.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -294,7 +270,6 @@ public RMIClient(){
     			int sum = obj.addNums(x,y);
     			System.out.println(sum);
     			
-    		
     			int mult = obj.multiplyNums(x,y);
     			System.out.println(mult);
 
@@ -305,6 +280,7 @@ public RMIClient(){
     			
     			int sub = obj.subNums(x,y);
     			System.out.println(sub);
+    	
     		}
     		catch (Exception ex) {
     			System.out.println("HelloWorldClient exception: "
@@ -314,6 +290,39 @@ public RMIClient(){
     			
 		}
 	});
+	
+	// Action listeners for operands
+	
+	
+	buttonMult.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+    		System.out.println("You pressed Multiply");
+    		view.setText("*");
+		}
+	});
+	
+	buttonDiv.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+    		System.out.println("You pressed Div");
+    		view.setText("/");
+		}
+	});
+	
+	buttonAdd.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+    		System.out.println("You pressed Add");
+    		view.setText("+");
+		}
+	});
+	
+	buttonSub.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+    		System.out.println("You pressed Subtrack");
+    		view.setText("-");
+		}
+	});
+	
+
 }
 
 	public static void main(String args[]){	

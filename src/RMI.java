@@ -14,8 +14,8 @@ Comment: The remote interface.
 
 public interface RMI extends Remote {
 	String helloWorld() throws RemoteException;
-	int addNums(int num1, int num2) throws RemoteException;
-	int subNums(int num1, int num2) throws RemoteException;
-	int multiplyNums(int num1, int num2) throws RemoteException;
-	int divideNums(int num1, int num2) throws RemoteException;
+	int addNums(int x, int y) throws RemoteException;
+	int subNums(int x, int y) throws RemoteException;
+	int multiplyNums(int x, int y) throws RemoteException;
+	int divideNums(int x, int y) throws RemoteException;
 }
