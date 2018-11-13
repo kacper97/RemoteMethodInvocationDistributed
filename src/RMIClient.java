@@ -30,7 +30,9 @@ static RMI obj = null;
 
 
 public RMIClient(){
+	
     // Window
+	
 	frame = new JFrame();
 	frame.setTitle("CALC");
 	frame.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
@@ -40,6 +42,19 @@ public RMIClient(){
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.getContentPane().setLayout(null);
 	frame.setVisible(true);
+	
+	//Text field
+    JScrollPane scrollPane = new JScrollPane(view);
+    scrollPane.setBounds(0, 0, 282, 85);
+    frame.getContentPane().add(scrollPane);
+    
+    view = new JTextField();
+    view.setEditable(false);
+    view.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
+    scrollPane.setViewportView(view);
+    view.setColumns(10);
+    
+    //Buttons
     
     JButton buttonDiv = new JButton("/");
     buttonDiv.setFont(new Font("Stencil", Font.PLAIN, 16));
@@ -74,6 +89,7 @@ public RMIClient(){
     buttonOne.setBackground(Color.CYAN);
     buttonOne.setLocation(12, 216);
     buttonOne.setSize(45,45);
+    buttonOne.addActionListener(e -> x=1);
     frame.getContentPane().add(buttonOne);
 
     JButton buttonTwo = new JButton("2");
@@ -144,17 +160,87 @@ public RMIClient(){
     btnSubmit.setBackground(Color.CYAN);
     btnSubmit.setBounds(0, 345, 282, 58);
     frame.getContentPane().add(btnSubmit);
-    
-    JScrollPane scrollPane = new JScrollPane(view);
-    scrollPane.setBounds(0, 0, 282, 85);
-    frame.getContentPane().add(scrollPane);
-    
-    view = new JTextField();
-    view.setEditable(false);
-    view.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
-    scrollPane.setViewportView(view);
-    view.setColumns(10);
 
+    
+	buttonOne.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+    		System.out.println("You pressed One");
+    		view.setText("1");
+    			x = 1;
+		}
+	});
+	
+	buttonTwo.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+    		System.out.println("You pressed Two");
+    		view.setText("2");
+    			x = 2;
+		}
+	});
+	
+	buttonThree.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+    		System.out.println("You pressed Three");
+    		view.setText("3");
+    			x = 3;
+		}
+	});
+	
+	buttonFour.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+    		System.out.println("You pressed Four");
+    		view.setText("4");
+    			x = 4;
+		}
+	});
+	
+	buttonFive.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+    		System.out.println("You pressed Five");
+    		view.setText("5");
+    			x = 5;
+		}
+	});
+	
+	buttonSix.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+    		System.out.println("You pressed Six");
+    		view.setText("6");
+    			x = 6;
+		}
+	});
+	
+	buttonSeven.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+    		System.out.println("You pressed Seven");
+    		view.setText("7");
+    			x = 7;
+		}
+	});
+	
+	buttonEight.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+    		System.out.println("You pressed Eight");
+    		view.setText("8");
+    			x = 8;
+		}
+	});
+	
+	buttonNine.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+    		System.out.println("You pressed Nine");
+    		view.setText("9");
+    			x = 9;
+		}
+	});
+	
+	buttonZero.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+    		System.out.println("You pressed Zero");
+    		view.setText("0");
+    			x = 0;
+		}
+	});
 }
 
 	public static void main(String args[]){	
