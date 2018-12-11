@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import model.Calculator;
+
 public class CalculatorView implements ActionListener {
 	
 
