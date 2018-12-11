@@ -15,8 +15,8 @@ Comment: The remote interface.
 
 public interface Calculator extends Remote {
 	//String helloWorld() throws RemoteException;
-	int addNums(int x, int y) throws RemoteException;
-	int subNums(int x, int y) throws RemoteException;
-	int multiplyNums(int x, int y) throws RemoteException;
-	int divideNums(int x, int y) throws RemoteException;
+	int add(int x, int y) throws RemoteException;
+	int sub(int x, int y) throws RemoteException;
+	int multiply(int x, int y) throws RemoteException;
+	int divide(int x, int y) throws RemoteException;
 }
