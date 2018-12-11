@@ -24,7 +24,7 @@ public class RMIServer extends UnicastRemoteObject
 	public String helloWorld() {
 		System.out.println("Invocation to helloWorld was succesful!");
 		return "Hello World from RMI server!";
-	}
+	} 	
 	
 	@Override
 	public int addNums(int x, int y) throws RemoteException {
