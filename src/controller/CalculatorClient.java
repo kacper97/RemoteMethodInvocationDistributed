@@ -8,11 +8,11 @@ public class CalculatorClient {
 	//communication with RM + response to UI
 	public CalculatorClient() {}
 	
-	private int ans =0;
+	private double ans =0.0;
 	
 	//etAns method which is going to be called from User Interface
 
-	public double getAns(String type, int x, int y) {
+	public double getAns(String type, double x, double y) {
 		try {
 			//Naming.lookup returns an Object that has to be cast to whatever remote interface you're expecting it to be.
 			Calculator obj = (Calculator) Naming.lookup("//localhost/Calculator");
@@ -29,6 +29,8 @@ public class CalculatorClient {
 			case("multiply"):
 				ans =obj.multiply(x, y);
 				break;
+			case("power"):
+				ans=obj.power(x,y);
 			}
 		}
 		catch (Exception e) {

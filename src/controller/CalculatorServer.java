@@ -18,8 +18,6 @@ public CalculatorServer() throws RemoteException {
 	super();
 }
 
-
-
 @Override
 public double add(double x, double y) throws RemoteException {
 	System.out.println("Add Nums bound in registry");
@@ -49,9 +47,6 @@ public double power(double x, double y) throws RemoteException {
 	System.out.println("Power Bounded in reg");
 	return Math.pow(x,y);
 }
-
-
-
 
 public static void main(String args[]) {
 	try {
