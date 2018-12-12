@@ -59,29 +59,29 @@ static Calculator obj = null; // will change this to read from Calc client inste
 	    JButton buttonDiv = new JButton("/");
 	    buttonDiv.setFont(new Font("Stencil", Font.PLAIN, 16));
 	    buttonDiv.setBackground(Color.CYAN);
-	    buttonDiv.setLocation(230, 274);
-	    buttonDiv.setSize(45,45);
+	    buttonDiv.setLocation(230, 190);
+	    buttonDiv.setSize(45,30);
 	    frame.getContentPane().add(buttonDiv);
 	    
 	    JButton buttonAdd = new JButton("+");
 	    buttonAdd.setFont(new Font("Stencil", Font.PLAIN, 16));
 	    buttonAdd.setBackground(Color.CYAN);
-	    buttonAdd.setLocation(230, 158);
-	    buttonAdd.setSize(45,45);
+	    buttonAdd.setLocation(230, 130);
+	    buttonAdd.setSize(45,30);
 	    frame.getContentPane().add(buttonAdd);
 	    
 	    JButton buttonMult = new JButton("*");
 	    buttonMult.setFont(new Font("Stencil", Font.PLAIN, 16));
 	    buttonMult.setBackground(Color.CYAN);
-	    buttonMult.setLocation(230, 216);
-	    buttonMult.setSize(45,45);
+	    buttonMult.setLocation(230, 160);
+	    buttonMult.setSize(45,30);
 	    frame.getContentPane().add(buttonMult);
 	    
 	    JButton buttonSub = new JButton("-");
 	    buttonSub.setFont(new Font("Stencil", Font.PLAIN, 16));
 	    buttonSub.setBackground(Color.CYAN);
 	    buttonSub.setLocation(230, 100);
-	    buttonSub.setSize(45,45);
+	    buttonSub.setSize(45,30);
 	    frame.getContentPane().add(buttonSub);
 	    
 	    JButton buttonOne = new JButton("1");
@@ -161,14 +161,47 @@ static Calculator obj = null; // will change this to read from Calc client inste
 	    btnSubmit.setBounds(0, 345, 282, 58);
 	    frame.getContentPane().add(btnSubmit);
 	    
+	    JButton buttonDec = new JButton(".");
+	    buttonDec.setFont(new Font("Stencil", Font.PLAIN, 16));
+	    buttonDec.setBackground(Color.CYAN);
+	    buttonDec.setBounds(230, 310, 45, 30);
+	    frame.getContentPane().add(buttonDec);
+	    
+	    JButton buttonBracket1 = new JButton("(");
+	    buttonBracket1.setFont(new Font("Stencil", Font.PLAIN, 16));
+	    buttonBracket1.setBackground(Color.CYAN);
+	    buttonBracket1.setBounds(230, 220, 45, 30);
+	    frame.getContentPane().add(buttonBracket1);
+	    
+	    JButton buttonBracket2 = new JButton(")");
+	    buttonBracket2.setFont(new Font("Stencil", Font.PLAIN, 16));
+	    buttonBracket2.setBackground(Color.CYAN);
+	    buttonBracket2.setBounds(230, 250, 45, 30);
+	    frame.getContentPane().add(buttonBracket2);
+	    
+	    JButton buttonPower = new JButton("^");
+	    buttonPower.setFont(new Font("Stencil", Font.PLAIN, 16));
+	    buttonPower.setBackground(Color.CYAN);
+	    buttonPower.setBounds(230, 280, 45, 30);
+	    frame.getContentPane().add(buttonPower);
+	    
+	    JButton buttonClear = new JButton("CLEAR");
+	    buttonClear.setFont(new Font("Stencil", Font.PLAIN, 16));
+	    buttonClear.setBackground(Color.CYAN);
+	    buttonClear.setBounds(84, 274, 117, 45);
+	    frame.getContentPane().add(buttonClear);
+	    
 	    //Numeric buttons Action listener
 
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent e) {		
+		switch(e.getActionCommand()) {
+		case("CLEAR"):
+			view.setText(""); //if clear is the action obtained make view blank
+			break;
+		}
 		
 	}
-
 }
