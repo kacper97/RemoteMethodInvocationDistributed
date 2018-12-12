@@ -1,23 +1,19 @@
 package model;
-/*
-Filename: RMI.java
-*/
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /*
-
-Class name: RMI
-Comment: The remote interface.
-
+Classname: Calculator
+Filename: Calculator.java
+Author: Kacper WOloszyn 
+Purpose: The Calculator Interface of the RMI server.
 */
 
 public interface Calculator extends Remote {
-	//String helloWorld() throws RemoteException;
-	int add(int x, int y) throws RemoteException;
-	int sub(int x, int y) throws RemoteException;
-	int multiply(int x, int y) throws RemoteException;
-	int divide(int x, int y) throws RemoteException;
-	int power(int x, int y) throws RemoteException;
+	double add(double x, double y) throws RemoteException;
+	double sub(double x, double y) throws RemoteException;
+	double multiply(double x, double y) throws RemoteException;
+	double divide(double x, double y) throws RemoteException;
+	double power(double x, double y) throws RemoteException;
 }

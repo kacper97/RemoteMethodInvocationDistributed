@@ -9,8 +9,7 @@ import javax.swing.BoundedRangeModel;
 
 import model.Calculator;
 
-public class CalculatorServer extends UnicastRemoteObject
-implements Calculator {
+public class CalculatorServer extends UnicastRemoteObject implements Calculator {
 
 	//maths methods handler
 
@@ -19,40 +18,40 @@ public CalculatorServer() throws RemoteException {
 	super();
 }
 
-public String helloWorld() {
-	System.out.println("Invocation to helloWorld was succesful!");
-	return "Hello World from RMI server!";
-} 	
+
 
 @Override
-public int add(int x, int y) throws RemoteException {
+public double add(double x, double y) throws RemoteException {
 	System.out.println("Add Nums bound in registry");
 	return x + y ;
 }
 
 @Override
-public int sub(int x, int y) throws RemoteException {
+public double sub(double x, double y) throws RemoteException {
 	System.out.println("sub Nums bound in registry");
 	return x- y ;
 }
 
 @Override
-public int multiply(int x, int y) throws RemoteException {
+public double multiply(double x, double y) throws RemoteException {
 	System.out.println("Mult Nums bound in registry");
 	return x*y;
 }
 
 @Override
-public int divide(int x, int y) throws RemoteException {
+public double divide(double x, double y) throws RemoteException {
 	System.out.println("Div Nums bound in registry");
 	return x/y;
 }
 
 @Override
-public int power(int x, int y) throws RemoteException {
+public double power(double x, double y) throws RemoteException {
 	System.out.println("Power Bounded in reg");
 	return Math.pow(x,y);
 }
+
+
+
 
 public static void main(String args[]) {
 	try {
@@ -66,14 +65,14 @@ public static void main(String args[]) {
 		 Registry registry = LocateRegistry.createRegistry( 1099 );
 
 		// and replace the Naming.rebind() with the next line
-		 registry.rebind( "HelloWorld", obj );
+		 registry.rebind( "Calculator", obj );
 	
 		//Naming.rebind("HelloWorld", obj);
-		System.out.println("HelloWorld bound in registry");
+		System.out.println("Calculator bound in registry");
 
 	}
 	catch (Exception e) {
-		System.out.println("HelloWorldServer error: " + e.getMessage());
+		System.out.println("Calculator error: " + e.getMessage());
 		e.printStackTrace();
 	}
   }
