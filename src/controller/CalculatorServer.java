@@ -9,6 +9,12 @@ import javax.swing.BoundedRangeModel;
 
 import model.Calculator;
 
+/*
+Classname: CalculatorServer
+Filename: CalculatorServer.java
+Author: Kacper Woloszyn 
+Purpose: The Calculator Server handles the method calls to the RMI and creates RMI object
+*/
 public class CalculatorServer extends UnicastRemoteObject implements Calculator {
 
 	//maths methods handler

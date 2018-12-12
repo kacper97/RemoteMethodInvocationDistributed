@@ -8,6 +8,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*
+Classname: ServerView
+Filename: ServerView.java
+Author: Kacper Woloszyn 
+Purpose: The Server GUI which provides text output for calculator
+*/
 
 public class ServerView implements ActionListener {
 	
@@ -18,7 +24,6 @@ public class ServerView implements ActionListener {
     public ServerView(){
         JFrame frame = new JFrame("RMI Server");
         calcBtn = new JButton("Calculator");
-
         calcBtn.addActionListener(this);
 
         frame.add(new JScrollPane(area), BorderLayout.CENTER);

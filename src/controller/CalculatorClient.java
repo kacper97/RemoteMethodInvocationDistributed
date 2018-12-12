@@ -4,13 +4,20 @@ import java.rmi.Naming;
 
 import model.Calculator;
 
+/*
+Classname: CalculatorClient
+Filename: CalculatorClient.java
+Author: Kacper Woloszyn 
+Purpose: The Calculator Client obtains answers from RMI
+*/
+
 public class CalculatorClient {
 	//communication with RM + response to UI
 	public CalculatorClient() {}
 	
 	private double ans =0.0;
 	
-	//etAns method which is going to be called from User Interface
+	//getAns method which is going to be called from User Interface
 
 	public double getAns(String type, double x, double y) {
 		try {

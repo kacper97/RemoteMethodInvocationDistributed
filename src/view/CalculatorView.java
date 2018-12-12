@@ -12,6 +12,13 @@ import javax.swing.JTextField;
 
 import model.Calculator;
 
+/*
+Classname: CalculatorView
+Filename: CalculatorView.java
+Author: Kacper Woloszyn 
+Purpose: The Calculator GUI with stack implementations for correct operation
+*/
+
 public class CalculatorView implements ActionListener {
 	
 
@@ -202,6 +209,28 @@ static Calculator obj = null; // will change this to read from Calc client inste
 			view.setText(""); //if clear is the action obtained make view blank
 			break;
 		}
+		
+	}
+	
+	//I need a method to calculate based on the top element of  the stack
+	// and a method that parses reverse polish to stack 
+	// takes in the calculation string
+	private void calculate(String calculation) {
+		
+	}
+	
+	//Need a method that converts the textield from infix to postfix for RMI
+	//Convert the infix form to postfix using a stack to store operators 
+	//then pop them in correct order of precedence
+	
+	private void converterInfixToPostfix(String s) {
+		
+	}
+	
+	//Also I need a method to give operators the priority
+	//so if a bracket is added then push it to the top of the stack
+	// the method takes in the operator , and which priority it is
+	private void operatorPriority(char operator, int priority) {
 		
 	}
 }
