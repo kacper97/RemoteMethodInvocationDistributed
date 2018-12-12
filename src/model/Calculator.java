@@ -19,4 +19,5 @@ public interface Calculator extends Remote {
 	int sub(int x, int y) throws RemoteException;
 	int multiply(int x, int y) throws RemoteException;
 	int divide(int x, int y) throws RemoteException;
+	int power(int x, int y) throws RemoteException;
 }

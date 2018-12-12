@@ -5,6 +5,8 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+import javax.swing.BoundedRangeModel;
+
 import model.Calculator;
 
 public class CalculatorServer extends UnicastRemoteObject
@@ -44,6 +46,12 @@ public int multiply(int x, int y) throws RemoteException {
 public int divide(int x, int y) throws RemoteException {
 	System.out.println("Div Nums bound in registry");
 	return x/y;
+}
+
+@Override
+public int power(int x, int y) throws RemoteException {
+	System.out.println("Power Bounded in reg");
+	return Math.pow(x,y);
 }
 
 public static void main(String args[]) {
