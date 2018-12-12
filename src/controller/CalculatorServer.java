@@ -25,29 +25,25 @@ public String helloWorld() {
 @Override
 public int add(int x, int y) throws RemoteException {
 	System.out.println("Add Nums bound in registry");
-	int sum = x + y;
-	return sum;
+	return x + y ;
 }
 
 @Override
 public int sub(int x, int y) throws RemoteException {
 	System.out.println("sub Nums bound in registry");
-	int sub = x - y;
-	return sub;
+	return x- y ;
 }
 
 @Override
 public int multiply(int x, int y) throws RemoteException {
 	System.out.println("Mult Nums bound in registry");
-	int mult = x*y ;
-	return mult;
+	return x*y;
 }
 
 @Override
 public int divide(int x, int y) throws RemoteException {
 	System.out.println("Div Nums bound in registry");
-	int div = x/y;
-	return div;
+	return x/y;
 }
 
 public static void main(String args[]) {
