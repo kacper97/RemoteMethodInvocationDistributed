@@ -4,40 +4,45 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Stack;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import controller.CalculatorClient;
 import model.Calculator;
+import static java.lang.Character.isDigit;
 
 /*
 Classname: CalculatorView
 Filename: CalculatorView.java
 Author: Kacper Woloszyn 
 Purpose: The Calculator GUI with stack implementations for correct operation
+Comment  : Used the stack lab from Second year to implement a stack calculator
 */
 
 public class CalculatorView implements ActionListener {
-	
 
 static String message = "blank";
 int x;
 int y;
 public JFrame frame;
 private JTextField view = new JTextField();
+private String output, ans, postfix;
+private Stack<Double> memory;
+private Stack<Character> stack;
+private CalculatorClient calc;
 
-// The HelloWorld object "obj" is the identifier that is
-// used to refer to the remote object that implements
-// the HelloWorld interface.
-
-static Calculator obj = null; // will change this to read from Calc client instead 
-
-	// Here I will bring in calculator Ui with action listeners and inputs / displays
-	
+//Constructor to build swing ui
 	public CalculatorView(){
-		
+		calc = new CalculatorClient();
+		stack = new Stack<>();
+		memory = new Stack<>();
+		output = "";
+		ans = "";
+		postfix = "";
 	    // Window
 		frame = new JFrame();
 		frame.setTitle("CALC");
@@ -53,7 +58,6 @@ static Calculator obj = null; // will change this to read from Calc client inste
 	    JScrollPane scrollPane = new JScrollPane();
 	    scrollPane.setBounds(0, 0, 282, 85);
 	    frame.getContentPane().add(scrollPane);
-	    
 	    view = new JTextField();
 	    view.setEditable(false);
 	    view.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
@@ -162,7 +166,7 @@ static Calculator obj = null; // will change this to read from Calc client inste
 	    buttonZero.setSize(45,45);
 	    frame.getContentPane().add(buttonZero);
 	    
-	    JButton btnSubmit = new JButton("Submit");
+	    JButton btnSubmit = new JButton("SUBMIT");
 	    btnSubmit.setFont(new Font("Stencil", Font.PLAIN, 16));
 	    btnSubmit.setBackground(Color.CYAN);
 	    btnSubmit.setBounds(0, 345, 282, 58);
@@ -208,29 +212,164 @@ static Calculator obj = null; // will change this to read from Calc client inste
 		case("CLEAR"):
 			view.setText(""); //if clear is the action obtained make view blank
 			break;
+		case("SUBMIT"):
+			converterInfixToPostfix(view.getText()); //if submit is pressed, pass view text to parse method
+        break;
+        default: view.setText(view.getText().concat(e.getActionCommand())); //default builds the view
 		}
 		
 	}
-	
-	//I need a method to calculate based on the top element of  the stack
-	// and a method that parses reverse polish to stack 
-	// takes in the calculation string
-	private void calculate(String calculation) {
-		
-	}
-	
 	//Need a method that converts the textield from infix to postfix for RMI
 	//Convert the infix form to postfix using a stack to store operators 
 	//then pop them in correct order of precedence
 	
 	private void converterInfixToPostfix(String s) {
-		
+		for(int i = 0; i< s.length(); i++){
+            char in = s.charAt(i);
+            if((!isDigit(in)) && (in!='.') && (in!='(') && (in!=')')){
+                char blankSpace = ' ';
+                output = output + blankSpace;
+            }
+            switch (in){
+                case '+':
+                case '-':
+                    priorityOfOperator(in, 1);
+                    break;
+                case '*':
+                case '/':
+                    priorityOfOperator(in, 2);
+                    break;
+                case '^':
+                    while(!stack.isEmpty()){
+                        int prec1 = 3;
+                        char topStack = stack.pop();
+                        if (topStack == '('){
+                            stack.push(topStack);
+                            break;
+                        }else{
+                            int priority2;
+                            if(topStack == '+' || topStack == '-') {
+                                priority2 = 1;
+                            }else {
+                                priority2 = 2;
+                            }
+                            if(topStack == '*' || topStack == '/') {
+                                priority2 = 1;
+                            }else{
+                                priority2 = 2;
+                            }
+                            if(priority2 < prec1){
+                                stack.push(topStack);
+                                break;
+                            }else output = output + topStack + ' ';
+                        }
+                    }
+                    stack.push(in);
+                    break;
+                case '(':
+                    stack.push(in);
+                    break;
+                case ')':
+                    while(!stack.isEmpty()){
+                        char per = stack.pop();
+                        if(per=='('){
+                            break;
+                        }else{
+                            output = output + " " + per;
+                        }
+                    }
+                    break;
+                default:
+                    output = output + in;
+                    break;
+            }
+        }
+        while(!stack.isEmpty()){
+            output = output + ' ' + stack.pop();
+        }
+        postfix = output;
+        System.out.println("Reverse Polish Notation : " + postfix);
+        calculate(output);
+	}
+	
+	
+	//I need a method to calculate based on the top element of  the stack
+	// and a method that parses reverse polish to stack 
+	// takes in the calculation string
+	private void calculate(String calculation) {
+		memory.clear();
+        ans = "";
+        //keeping the doubles consistent in the program to be x and y
+        double x;
+        double y;
+        //tokenization using space
+        String[] tokens = output.split(" ");
+        for (String currentElement : tokens) {
+            if ((!currentElement.equals("+")) && (!currentElement.equals("-"))
+                    && (!currentElement.equals("*")) && (!currentElement.equals("/"))
+                    && (!currentElement.equals("^"))) {
+                memory.push(Double.parseDouble(currentElement));
+                
+               //calc.getAns calls the Calculator Client method
+            } else if (memory.size() >= 2) {
+                if (currentElement.equals("+")) {
+                    x = memory.pop();
+                    y = memory.pop();
+                    memory.push(calc.getAns("add", x, y));
+                }
+                
+                if (currentElement.equals("-")) {
+                    x = memory.pop();
+                    y = memory.pop();
+                    memory.push(calc.getAns("sub", x, y));
+                }
+                
+                if (currentElement.equals("/")) {
+                    x = memory.pop();
+                    y = memory.pop();
+                    memory.push(calc.getAns("divide", x, y));
+                }
+      
+                if (currentElement.equals("*")) {
+                    x = memory.pop();
+                    y = memory.pop();
+                    memory.push(calc.getAns("multiply", x, y));
+                }
+              
+                if (currentElement.equals("^")) {
+                    x = memory.pop();
+                    y = memory.pop();
+                    memory.push(calc.getAns("power", x, y));
+                }
+            }
+        }
+        view.setText(ans + memory.pop());
+
 	}
 	
 	//Also I need a method to give operators the priority
 	//so if a bracket is added then push it to the top of the stack
 	// the method takes in the operator , and which priority it is
-	private void operatorPriority(char operator, int priority) {
-		
+	private void priorityOfOperator(char operator, int priority) {
+		 while(!stack.isEmpty()){
+			 //stack.pop removes and returns the top object of the stack
+	            char topofStack = stack.pop();
+	            if (topofStack == '('){
+	                stack.push(topofStack);
+	                break;
+	            }else{
+	                int priority2;
+	                if(topofStack == '+' || topofStack == '-') {
+	                    priority2 = 1;
+	                }else {
+	                    priority2 = 2;
+	                }
+	                if(priority2 < priority){
+	                    stack.push(topofStack);
+	                    break;
+	                }else output = output + topofStack + ' ';
+	            }
+	        }
+	        stack.push(operator);
 	}
 }
