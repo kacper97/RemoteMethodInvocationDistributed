@@ -66,12 +66,13 @@ private CalculatorClient calc;
 
 	    
 	    //Buttons Set up
-	    
+	    //Operators
 	    JButton buttonDiv = new JButton("/");
 	    buttonDiv.setFont(new Font("Stencil", Font.PLAIN, 16));
 	    buttonDiv.setBackground(Color.CYAN);
 	    buttonDiv.setLocation(230, 190);
 	    buttonDiv.setSize(45,30);
+	    buttonDiv.addActionListener(this);
 	    frame.getContentPane().add(buttonDiv);
 	    
 	    JButton buttonAdd = new JButton("+");
@@ -79,6 +80,7 @@ private CalculatorClient calc;
 	    buttonAdd.setBackground(Color.CYAN);
 	    buttonAdd.setLocation(230, 130);
 	    buttonAdd.setSize(45,30);
+	    buttonAdd.addActionListener(this);
 	    frame.getContentPane().add(buttonAdd);
 	    
 	    JButton buttonMult = new JButton("*");
@@ -86,6 +88,7 @@ private CalculatorClient calc;
 	    buttonMult.setBackground(Color.CYAN);
 	    buttonMult.setLocation(230, 160);
 	    buttonMult.setSize(45,30);
+	    buttonMult.addActionListener(this);
 	    frame.getContentPane().add(buttonMult);
 	    
 	    JButton buttonSub = new JButton("-");
@@ -93,14 +96,38 @@ private CalculatorClient calc;
 	    buttonSub.setBackground(Color.CYAN);
 	    buttonSub.setLocation(230, 100);
 	    buttonSub.setSize(45,30);
+	    buttonSub.addActionListener(this);
 	    frame.getContentPane().add(buttonSub);
+	    
+	    JButton buttonBracket1 = new JButton("(");
+	    buttonBracket1.setFont(new Font("Stencil", Font.PLAIN, 16));
+	    buttonBracket1.setBackground(Color.CYAN);
+	    buttonBracket1.setBounds(230, 220, 45, 30);
+	    buttonBracket1.addActionListener(this);
+	    frame.getContentPane().add(buttonBracket1);
+	    
+	    JButton buttonBracket2 = new JButton(")");
+	    buttonBracket2.setFont(new Font("Stencil", Font.PLAIN, 16));
+	    buttonBracket2.setBackground(Color.CYAN);
+	    buttonBracket2.setBounds(230, 250, 45, 30);
+	    buttonBracket2.addActionListener(this);
+	    frame.getContentPane().add(buttonBracket2);
+	    
+	    JButton buttonPower = new JButton("^");
+	    buttonPower.setFont(new Font("Stencil", Font.PLAIN, 16));
+	    buttonPower.setBackground(Color.CYAN);
+	    buttonPower.setBounds(230, 280, 45, 30);
+	    buttonPower.addActionListener(this);
+	    frame.getContentPane().add(buttonPower);
+	    
+	    // Numeric
 	    
 	    JButton buttonOne = new JButton("1");
 	    buttonOne.setFont(new Font("Stencil", Font.PLAIN, 16));
 	    buttonOne.setBackground(Color.CYAN);
 	    buttonOne.setLocation(12, 216);
 	    buttonOne.setSize(45,45);
-	    buttonOne.addActionListener(e -> x=1);
+	    buttonOne.addActionListener(this);
 	    frame.getContentPane().add(buttonOne);
 
 	    JButton buttonTwo = new JButton("2");
@@ -108,6 +135,7 @@ private CalculatorClient calc;
 	    buttonTwo.setBackground(Color.CYAN);
 	    buttonTwo.setLocation(84, 216);
 	    buttonTwo.setSize(45,45);
+	    buttonTwo.addActionListener(this);
 	    frame.getContentPane().add(buttonTwo);
 	    
 	    JButton buttonThree = new JButton("3");
@@ -115,6 +143,7 @@ private CalculatorClient calc;
 	    buttonThree.setBackground(Color.CYAN);
 	    buttonThree.setLocation(155, 216);
 	    buttonThree.setSize(45,45);
+	    buttonThree.addActionListener(this);
 	    frame.getContentPane().add(buttonThree);
 	    
 	    JButton buttonFour = new JButton("4");
@@ -122,6 +151,7 @@ private CalculatorClient calc;
 	    buttonFour.setBackground(Color.CYAN);
 	    buttonFour.setLocation(12, 158);
 	    buttonFour.setSize(45, 45);
+	    buttonFour.addActionListener(this);
 	    frame.getContentPane().add(buttonFour);
 	    
 	    JButton buttonFive = new JButton("5");
@@ -129,6 +159,7 @@ private CalculatorClient calc;
 	    buttonFive.setBackground(Color.CYAN);
 	    buttonFive.setSize(45, 45);
 	    buttonFive.setLocation(84, 158);
+	    buttonFive.addActionListener(this);
 	    frame.getContentPane().add(buttonFive);
 	    
 	    JButton buttonSix = new JButton("6");
@@ -136,6 +167,7 @@ private CalculatorClient calc;
 	    buttonSix.setBackground(Color.CYAN);
 	    buttonSix.setLocation(155, 158);
 	    buttonSix.setSize(45,45);
+	    buttonSix.addActionListener(this);
 	    frame.getContentPane().add(buttonSix);
 	    
 	    JButton buttonSeven = new JButton("7");
@@ -143,6 +175,7 @@ private CalculatorClient calc;
 	    buttonSeven.setBackground(Color.CYAN);
 	    buttonSeven.setLocation(12, 100);
 	    buttonSeven.setSize(45,45);
+	    buttonSeven.addActionListener(this);
 	    frame.getContentPane().add(buttonSeven);
 	    
 	    JButton buttonEight = new JButton("8");
@@ -150,6 +183,7 @@ private CalculatorClient calc;
 	    buttonEight.setBackground(Color.CYAN);
 	    buttonEight.setLocation(84, 100);
 	    buttonEight.setSize(45,45);
+	    buttonEight.addActionListener(this);
 	    frame.getContentPane().add(buttonEight);
 	    
 	    JButton buttonNine = new JButton("9");
@@ -157,6 +191,7 @@ private CalculatorClient calc;
 	    buttonNine.setBackground(Color.CYAN);
 	    buttonNine.setLocation(155, 100);
 	    buttonNine.setSize(45,45);
+	    buttonNine.addActionListener(this);
 	    frame.getContentPane().add(buttonNine);
 	    
 	    JButton buttonZero = new JButton("0");
@@ -167,43 +202,28 @@ private CalculatorClient calc;
 	    buttonZero.addActionListener(this);
 	    frame.getContentPane().add(buttonZero);
 	    
-	    JButton btnSubmit = new JButton("SUBMIT");
-	    btnSubmit.setFont(new Font("Stencil", Font.PLAIN, 16));
-	    btnSubmit.setBackground(Color.CYAN);
-	    btnSubmit.setBounds(0, 345, 282, 58);
-	    frame.getContentPane().add(btnSubmit);
+	    //Operational
+	    
+	    JButton buttonSubmit = new JButton("SUBMIT");
+	    buttonSubmit.setFont(new Font("Stencil", Font.PLAIN, 16));
+	    buttonSubmit.setBackground(Color.CYAN);
+	    buttonSubmit.setBounds(0, 345, 282, 58);
+	    buttonSubmit.addActionListener(this);
+	    frame.getContentPane().add(buttonSubmit);
 	    
 	    JButton buttonDec = new JButton(".");
 	    buttonDec.setFont(new Font("Stencil", Font.PLAIN, 16));
 	    buttonDec.setBackground(Color.CYAN);
 	    buttonDec.setBounds(230, 310, 45, 30);
+	    buttonDec.addActionListener(this);
 	    frame.getContentPane().add(buttonDec);
-	    
-	    JButton buttonBracket1 = new JButton("(");
-	    buttonBracket1.setFont(new Font("Stencil", Font.PLAIN, 16));
-	    buttonBracket1.setBackground(Color.CYAN);
-	    buttonBracket1.setBounds(230, 220, 45, 30);
-	    frame.getContentPane().add(buttonBracket1);
-	    
-	    JButton buttonBracket2 = new JButton(")");
-	    buttonBracket2.setFont(new Font("Stencil", Font.PLAIN, 16));
-	    buttonBracket2.setBackground(Color.CYAN);
-	    buttonBracket2.setBounds(230, 250, 45, 30);
-	    frame.getContentPane().add(buttonBracket2);
-	    
-	    JButton buttonPower = new JButton("^");
-	    buttonPower.setFont(new Font("Stencil", Font.PLAIN, 16));
-	    buttonPower.setBackground(Color.CYAN);
-	    buttonPower.setBounds(230, 280, 45, 30);
-	    frame.getContentPane().add(buttonPower);
 	    
 	    JButton buttonClear = new JButton("CLEAR");
 	    buttonClear.setFont(new Font("Stencil", Font.PLAIN, 16));
 	    buttonClear.setBackground(Color.CYAN);
 	    buttonClear.setBounds(84, 274, 117, 45);
+	    buttonClear.addActionListener(this);
 	    frame.getContentPane().add(buttonClear);
-	    
-	    //Numeric buttons Action listener
 
 	}
 
