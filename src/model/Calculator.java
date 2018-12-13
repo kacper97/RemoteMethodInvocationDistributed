@@ -6,7 +6,7 @@ import java.rmi.RemoteException;
 /*
 Classname: Calculator
 Filename: Calculator.java
-Author: Kacper WOloszyn 
+Author: Kacper Woloszyn 
 Purpose: The Calculator Interface of the RMI server.
 */
 

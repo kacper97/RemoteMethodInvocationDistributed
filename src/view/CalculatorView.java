@@ -164,6 +164,7 @@ private CalculatorClient calc;
 	    buttonZero.setBackground(Color.CYAN);
 	    buttonZero.setLocation(12, 274);
 	    buttonZero.setSize(45,45);
+	    buttonZero.addActionListener(this);
 	    frame.getContentPane().add(buttonZero);
 	    
 	    JButton btnSubmit = new JButton("SUBMIT");
