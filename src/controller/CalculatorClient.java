@@ -38,6 +38,7 @@ public class CalculatorClient {
 				break;
 			case("power"):
 				ans=obj.power(x,y);
+				break;
 			}
 		}
 		catch (Exception e) {
