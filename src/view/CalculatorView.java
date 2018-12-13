@@ -303,71 +303,88 @@ private CalculatorClient calc;
 	//then pop them in correct order of precedence
 	
 	private void converterInfixToPostfix(String s) {
+		// for any length of string do this
 		for(int i = 0; i< s.length(); i++){
-            char in = s.charAt(i);
-            if((!isDigit(in)) && (in!='.') && (in!='(') && (in!=')')){
+            char characterAtI = s.charAt(i);
+            //if a digit and not a operator and no operator is given
+            
+            if((!isDigit(characterAtI)) && (characterAtI!='.') && (characterAtI!='(') && (characterAtI!=')')){
                 char blankSpace = ' ';
                 output = output + blankSpace;
             }
-            switch (in){
+            //if operator is given
+            
+            switch (characterAtI){
+            //assign priorities based on the method below
                 case '+':
                 case '-':
-                    priorityOfOperator(in, 1);
+                    priorityOfOperator(characterAtI, 1);
                     break;
                 case '*':
                 case '/':
-                    priorityOfOperator(in, 2);
+                    priorityOfOperator(characterAtI, 2);
                     break;
+                    
+                    //if power
                 case '^':
+                	//if stack is not empty then precidence  is 3. 
+                	//The condition of being considered more important than someone or something else is precidence
                     while(!stack.isEmpty()){
-                        int prec1 = 3;
-                        char topStack = stack.pop();
-                        if (topStack == '('){
-                            stack.push(topStack);
+                        int precidence1 = 3;
+                        char topofStack = stack.pop(); // check the top of stack character by poping
+                        if (topofStack == '('){
+                            stack.push(topofStack); // if bracket is first push 
                             break;
                         }else{
+                        	//if not a brackets its priority 2
                             int priority2;
-                            if(topStack == '+' || topStack == '-') {
+                            if(topofStack == '+' || topofStack == '-') {
                                 priority2 = 1;
                             }else {
                                 priority2 = 2;
                             }
-                            if(topStack == '*' || topStack == '/') {
+                            //
+                            if(topofStack == '*' || topofStack == '/') {
                                 priority2 = 1;
                             }else{
                                 priority2 = 2;
                             }
-                            if(priority2 < prec1){
-                                stack.push(topStack);
+                            //if less than 3 signs/ as precidence is 3
+                            if(priority2 < precidence1){
+                                stack.push(topofStack);
                                 break;
-                            }else output = output + topStack + ' ';
+                            }else output = output + topofStack + ' ';
                         }
                     }
-                    stack.push(in);
+                    //if stack is empty push the first operator
+                    stack.push(characterAtI);
                     break;
+                    //if open bracket
                 case '(':
-                    stack.push(in);
+                    stack.push(characterAtI);
                     break;
+                    //if closed bracket and stack is not empty  and if there is no opening bracket then break, else print output
                 case ')':
                     while(!stack.isEmpty()){
-                        char per = stack.pop();
-                        if(per=='('){
+                        char twoBrack = stack.pop();
+                        if(twoBrack=='('){
                             break;
                         }else{
-                            output = output + " " + per;
+                            output = output + " " + twoBrack;
                         }
                     }
                     break;
+                    //Default is output is output + the operator
                 default:
-                    output = output + in;
+                    output = output + characterAtI;
                     break;
             }
         }
+		// if stack is empty output is output  and operator from stack
         while(!stack.isEmpty()){
             output = output + ' ' + stack.pop();
         }
-        postfix = output;
-        System.out.println("Reverse Polish Notation : " + postfix);
+        System.out.println("Reverse Polish Notation : " + output);
         calculate(output);
 	}
 	
@@ -388,6 +405,8 @@ private CalculatorClient calc;
 	                }else {
 	                    priority1 = 2;
 	                }
+	                //if + - priority 1 / else priority 1 assigned 2
+	                // if +- is less than priority given then push top of stack
 	                if(priority1 < priority){
 	                    stack.push(topofStack);
 	                    break;
