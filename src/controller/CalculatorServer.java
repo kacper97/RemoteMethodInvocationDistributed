@@ -8,6 +8,7 @@ import java.rmi.server.UnicastRemoteObject;
 import javax.swing.BoundedRangeModel;
 
 import model.Calculator;
+import view.ServerView;
 
 /*
 Classname: CalculatorServer
@@ -17,8 +18,8 @@ Purpose: The Calculator Server handles the method calls to the RMI and creates R
 */
 public class CalculatorServer extends UnicastRemoteObject implements Calculator {
 
-	//maths methods handler
 
+static ServerView serverView = new ServerView();
 	
 public CalculatorServer() throws RemoteException {
 	super();
@@ -27,30 +28,35 @@ public CalculatorServer() throws RemoteException {
 @Override
 public double add(double x, double y) throws RemoteException {
 	System.out.println("Add Nums bound in registry");
+	serverView.handleAction("Add called : " + x + "+ " + y +"\n The following numbers and operators passed to client : " + (x+y));
 	return x + y ;
 }
 
 @Override
 public double sub(double x, double y) throws RemoteException {
 	System.out.println("sub Nums bound in registry");
+	serverView.handleAction("Sub Called called : " + x + "- " + y +"\n The following numbers and operators passed to client : " + (x-y));
 	return x- y ;
 }
 
 @Override
 public double multiply(double x, double y) throws RemoteException {
 	System.out.println("Mult Nums bound in registry");
+	serverView.handleAction("Mult called : " + x + "* " + y +"\n The following numbers and operators passed to client : " + (x*y));
 	return x*y;
 }
 
 @Override
 public double divide(double x, double y) throws RemoteException {
 	System.out.println("Div Nums bound in registry");
+	serverView.handleAction("Div called : " + x + "/ " + y +"\n The following numbers and operators passed to client : " + (x/y));
 	return x/y;
 }
 
 @Override
 public double power(double x, double y) throws RemoteException {
 	System.out.println("Power Bounded in reg");
+	serverView.handleAction("Power called : " + x + "^ " + y +"\n The following numbers and operators passed to client : " + (Math.pow(x,y)));
 	return Math.pow(x,y);
 }
 
