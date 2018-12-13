@@ -22,7 +22,7 @@ public class ServerView implements ActionListener {
     final JButton calcBtn;
 
     public ServerView(){
-        JFrame frame = new JFrame("RMI Server");
+        JFrame frame = new JFrame("RMI Calculator Server");
         calcBtn = new JButton("Calculator");
         calcBtn.addActionListener(this);
 
