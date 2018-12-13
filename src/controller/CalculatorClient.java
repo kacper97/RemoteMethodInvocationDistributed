@@ -12,7 +12,7 @@ Purpose: The Calculator Client obtains answers from RMI
 */
 
 public class CalculatorClient {
-	//communication with RM + response to UI
+	//communication with RMI and UI answers are obtained here
 	public CalculatorClient() {}
 	
 	private double ans =0.0;
@@ -24,6 +24,7 @@ public class CalculatorClient {
 			//Naming.lookup returns an Object that has to be cast to whatever remote interface you're expecting it to be.
 			Calculator obj = (Calculator) Naming.lookup("//localhost/Calculator");
 			switch(type) {
+			//if any of the types below the client knows what to do and what answer to give
 			case("add"):
 				ans = obj.add(x, y);
 				break;

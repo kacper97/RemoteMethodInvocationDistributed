@@ -5,8 +5,7 @@ import model.Calculator;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 /*
 Classname: ServerView
@@ -15,34 +14,27 @@ Author: Kacper Woloszyn
 Purpose: The Server GUI which provides text output for calculator
 */
 
-public class ServerView implements ActionListener {
-	
+public class ServerView {
 	// Server View will provide a text output for calculator
 	final JTextArea area = new JTextArea();
-    final JButton calcBtn;
+    final JButton calculatorButton;
 
     public ServerView(){
         JFrame frame = new JFrame("RMI Calculator Server");
-        calcBtn = new JButton("Calculator");
-        calcBtn.addActionListener(this);
+        calculatorButton = new JButton("Open New Calculator");
 
+        // when button pressed launch new calculator view
+        calculatorButton.addActionListener(e -> new CalculatorView());
         frame.add(new JScrollPane(area), BorderLayout.CENTER);
-        frame.add(calcBtn, BorderLayout.SOUTH);
-
+        frame.add(calculatorButton, BorderLayout.SOUTH);
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         frame.setSize(500, 300);
         frame.setVisible(true);
     }
-
+    // FORMATNG OF THE INFORMATION THAT IS DISPLAYED IN THE WINDOW
+    // SO THAT NEW INFO IS ON A NEW LINE
     public void handleAction(String s){
         area.append(s + '\n');
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String action = e.getActionCommand();
-        if (action.equals("Calculator")){
-            new CalculatorView();
-        }
-    }
 }

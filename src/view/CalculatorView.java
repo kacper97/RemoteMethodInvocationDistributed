@@ -20,11 +20,12 @@ Classname: CalculatorView
 Filename: CalculatorView.java
 Author: Kacper Woloszyn 
 Purpose: The Calculator GUI with stack implementations for correct operation
-Comment  : Used the stack lab from Second year to implement a stack calculator
+
+Comment  : Used the stack lab from Second year to implement a stack calculator and using that in this assignment ( 3 methods at the bottom )
 */
 
 public class CalculatorView implements ActionListener {
-
+//initialization 
 static String message = "blank";
 int x;
 int y;
@@ -240,6 +241,63 @@ private CalculatorClient calc;
 		}
 		
 	}
+	
+	//I need a method to calculate based on the top element of  the stack
+		// and a method that parses reverse polish to stack 
+		// takes in the calculation string
+		private void calculate(String calculation) {
+			//clears the momory and answer =null
+			memory.clear();
+	        ans = "";
+	        //keeping the doubles consistent in the program to be x and y
+	        double x;
+	        double y;
+	        //tokenization using space
+	        String[] tokens = output.split(" ");
+	        for (String currentElement : tokens) {
+	        	//if not a number
+	            if ((!currentElement.equals("+")) && (!currentElement.equals("-"))
+	                    && (!currentElement.equals("*")) && (!currentElement.equals("/"))
+	                    && (!currentElement.equals("^"))) {
+	                memory.push(Double.parseDouble(currentElement));
+	                
+	              // else if 2 or more numbers imputed to the calculations , based on the + - / * ^ symbol
+	                //nested else if statement, if more than two numbers do this and then if different operators
+	            } else if (memory.size() >= 2) {
+	                if (currentElement.equals("+")) {
+	                    x = memory.pop();
+	                    y = memory.pop();
+	                    memory.push(calc.getAns("add", x, y));
+	                }
+	                
+	                if (currentElement.equals("-")) {
+	                    x = memory.pop();
+	                    y = memory.pop();
+	                    memory.push(calc.getAns("sub", x, y));
+	                }
+	                
+	                if (currentElement.equals("/")) {
+	                    x = memory.pop();
+	                    y = memory.pop();
+	                    memory.push(calc.getAns("divide", x, y));
+	                }
+	      
+	                if (currentElement.equals("*")) {
+	                    x = memory.pop();
+	                    y = memory.pop();
+	                    memory.push(calc.getAns("multiply", x, y));
+	                }
+	              
+	                if (currentElement.equals("^")) {
+	                    x = memory.pop();
+	                    y = memory.pop();
+	                    memory.push(calc.getAns("power", x, y));
+	                }
+	            }
+	        }
+	        view.setText(ans + memory.pop());
+		}
+		
 	//Need a method that converts the textield from infix to postfix for RMI
 	//Convert the infix form to postfix using a stack to store operators 
 	//then pop them in correct order of precedence
@@ -313,61 +371,6 @@ private CalculatorClient calc;
         calculate(output);
 	}
 	
-	
-	//I need a method to calculate based on the top element of  the stack
-	// and a method that parses reverse polish to stack 
-	// takes in the calculation string
-	private void calculate(String calculation) {
-		memory.clear();
-        ans = "";
-        //keeping the doubles consistent in the program to be x and y
-        double x;
-        double y;
-        //tokenization using space
-        String[] tokens = output.split(" ");
-        for (String currentElement : tokens) {
-            if ((!currentElement.equals("+")) && (!currentElement.equals("-"))
-                    && (!currentElement.equals("*")) && (!currentElement.equals("/"))
-                    && (!currentElement.equals("^"))) {
-                memory.push(Double.parseDouble(currentElement));
-                
-               //calc.getAns calls the Calculator Client method
-            } else if (memory.size() >= 2) {
-                if (currentElement.equals("+")) {
-                    x = memory.pop();
-                    y = memory.pop();
-                    memory.push(calc.getAns("add", x, y));
-                }
-                
-                if (currentElement.equals("-")) {
-                    x = memory.pop();
-                    y = memory.pop();
-                    memory.push(calc.getAns("sub", x, y));
-                }
-                
-                if (currentElement.equals("/")) {
-                    x = memory.pop();
-                    y = memory.pop();
-                    memory.push(calc.getAns("divide", x, y));
-                }
-      
-                if (currentElement.equals("*")) {
-                    x = memory.pop();
-                    y = memory.pop();
-                    memory.push(calc.getAns("multiply", x, y));
-                }
-              
-                if (currentElement.equals("^")) {
-                    x = memory.pop();
-                    y = memory.pop();
-                    memory.push(calc.getAns("power", x, y));
-                }
-            }
-        }
-        view.setText(ans + memory.pop());
-
-	}
-	
 	//Also I need a method to give operators the priority
 	//so if a bracket is added then push it to the top of the stack
 	// the method takes in the operator , and which priority it is
@@ -379,13 +382,13 @@ private CalculatorClient calc;
 	                stack.push(topofStack);
 	                break;
 	            }else{
-	                int priority2;
+	                int priority1;
 	                if(topofStack == '+' || topofStack == '-') {
-	                    priority2 = 1;
+	                    priority1 = 1;
 	                }else {
-	                    priority2 = 2;
+	                    priority1 = 2;
 	                }
-	                if(priority2 < priority){
+	                if(priority1 < priority){
 	                    stack.push(topofStack);
 	                    break;
 	                }else output = output + topofStack + ' ';
