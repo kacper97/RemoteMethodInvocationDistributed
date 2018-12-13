@@ -16,6 +16,8 @@ Classname: CalculatorServer
 Filename: CalculatorServer.java
 Author: Kacper Woloszyn 
 Purpose: The Calculator Server handles the method calls to the RMI and creates RMI object
+
+THIS IS THE DRIVER CLASS THAT RUNS THE PROJECT
 */
 public class CalculatorServer extends UnicastRemoteObject implements Calculator {
 
@@ -88,18 +90,15 @@ public void info() {
 public static void main(String args[]) {
 	try {
 
-		// Create an object of the HelloWorldServer class.
+		// Create an object of the CalculatorServer class.
 	
 		CalculatorServer obj = new CalculatorServer();
-		
-		// Bind this object instance to the name "HelloServer".
+
 		// Include the following line if rmiregistry was not started on the command line
 		 Registry registry = LocateRegistry.createRegistry( 1099 );
 
 		// and replace the Naming.rebind() with the next line
-		 registry.rebind( "Calculator", obj );
-	
-		//Naming.rebind("HelloWorld", obj);
+		registry.rebind( "Calculator", obj );
 		System.out.println("Calculator bound in registry");
 		serverView.handleAction("Calculator is bound in registery");
 	}

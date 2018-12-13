@@ -26,12 +26,11 @@ Comment  : Used the stack lab from Second year to implement a stack calculator a
 
 public class CalculatorView implements ActionListener {
 //initialization 
-static String message = "blank";
 int x;
 int y;
 public JFrame frame;
 private JTextField view = new JTextField();
-private String output, ans, postfix;
+private String output, ans;
 private Stack<Double> memory;
 private Stack<Character> stack;
 private CalculatorClient calc;
@@ -43,7 +42,6 @@ private CalculatorClient calc;
 		memory = new Stack<>();
 		output = "";
 		ans = "";
-		postfix = "";
 	    // Window
 		frame = new JFrame();
 		frame.setTitle("CALC");
@@ -242,7 +240,7 @@ private CalculatorClient calc;
 		
 	}
 	
-	//I need a method to calculate based on the top element of  the stack
+	   //I need a method to calculate based on the top element of  the stack
 		// and a method that parses reverse polish to stack 
 		// takes in the calculation string
 		private void calculate(String calculation) {
@@ -254,41 +252,41 @@ private CalculatorClient calc;
 	        double y;
 	        //tokenization using space
 	        String[] tokens = output.split(" ");
-	        for (String currentElement : tokens) {
+	        for (String currentInput : tokens) {
 	        	//if not a number
-	            if ((!currentElement.equals("+")) && (!currentElement.equals("-"))
-	                    && (!currentElement.equals("*")) && (!currentElement.equals("/"))
-	                    && (!currentElement.equals("^"))) {
-	                memory.push(Double.parseDouble(currentElement));
+	            if ((!currentInput.equals("+")) && (!currentInput.equals("-"))
+	                    && (!currentInput.equals("*")) && (!currentInput.equals("/"))
+	                    && (!currentInput.equals("^"))) {
+	                memory.push(Double.parseDouble(currentInput));
 	                
 	              // else if 2 or more numbers imputed to the calculations , based on the + - / * ^ symbol
 	                //nested else if statement, if more than two numbers do this and then if different operators
 	            } else if (memory.size() >= 2) {
-	                if (currentElement.equals("+")) {
+	                if (currentInput.equals("+")) {
 	                    x = memory.pop();
 	                    y = memory.pop();
 	                    memory.push(calc.getAns("add", x, y));
 	                }
 	                
-	                if (currentElement.equals("-")) {
+	                if (currentInput.equals("-")) {
 	                    x = memory.pop();
 	                    y = memory.pop();
 	                    memory.push(calc.getAns("sub", x, y));
 	                }
 	                
-	                if (currentElement.equals("/")) {
+	                if (currentInput.equals("/")) {
 	                    x = memory.pop();
 	                    y = memory.pop();
 	                    memory.push(calc.getAns("divide", x, y));
 	                }
 	      
-	                if (currentElement.equals("*")) {
+	                if (currentInput.equals("*")) {
 	                    x = memory.pop();
 	                    y = memory.pop();
 	                    memory.push(calc.getAns("multiply", x, y));
 	                }
 	              
-	                if (currentElement.equals("^")) {
+	                if (currentInput.equals("^")) {
 	                    x = memory.pop();
 	                    y = memory.pop();
 	                    memory.push(calc.getAns("power", x, y));
